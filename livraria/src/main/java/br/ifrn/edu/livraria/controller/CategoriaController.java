@@ -51,10 +51,8 @@ public class CategoriaController {
 	    }
 
 		categoriaService.cadastrar(cat);
-		ModelAndView mv = new ModelAndView("categoria/form");
-			
-				
-		return findAll();
+		ModelAndView rec =findAll(); 
+		return rec;
     }
 
 	@GetMapping("/lista")
@@ -64,4 +62,18 @@ public class CategoriaController {
         return mv;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

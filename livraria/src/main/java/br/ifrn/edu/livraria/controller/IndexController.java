@@ -12,9 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 
-	@GetMapping("/entrar")
+	@GetMapping("/teste")
 	public String entrar() {
-		return "index";
+		return "categoria/form2";
 	}
 	
 	@GetMapping("/base")
