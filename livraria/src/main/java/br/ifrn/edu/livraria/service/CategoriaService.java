@@ -26,8 +26,8 @@ public class CategoriaService {
         return repository.getOne(id);
     }
      
-    public void save(Categoria cat) {
-        repository.saveAndFlush(cat);
+    public Categoria save(Categoria cat) {
+        return repository.saveAndFlush(cat);
     }
      
     public void delete(Long id) {
