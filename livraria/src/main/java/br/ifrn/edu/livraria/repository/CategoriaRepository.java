@@ -14,4 +14,7 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Long>{
 	
 	@Query("select c from Categoria c where c.nome = ?1")
 	public List<Categoria> findByName(String nome);
+	
+	
 }
+	
