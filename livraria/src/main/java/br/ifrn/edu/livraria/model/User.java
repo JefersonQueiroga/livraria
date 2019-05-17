@@ -1,4 +1,4 @@
-package br.ifrn.edu.livraria.model;
+ package br.ifrn.edu.livraria.model;
 
 import java.util.Calendar;
 import java.util.Collection;
@@ -14,12 +14,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -41,7 +43,43 @@ public class User implements UserDetails {
 	@Column(unique = true)
 	@Size(min = 4, message = "USERNAME dev ter pelo menos 4 letras")
 	private String username;
+		
+	@Column
+	@NotBlank(message="Nome completo é obrigatório")
+	private String nomeCompleto;
+	
 
+	public String getNomeCompleto() {
+		return nomeCompleto;
+	}
+
+	public void setNomeCompleto(String nomeCompleto) {
+		this.nomeCompleto = nomeCompleto;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
+
+	@CPF(message="CPF Inválido")
+	private String cpf;
+	
 	@NotNull
 	@NotEmpty(message = "Password não pode ser vazio.")
 	@Size(min = 6, message = "Password deve ser no mínimo 6 caracter.")

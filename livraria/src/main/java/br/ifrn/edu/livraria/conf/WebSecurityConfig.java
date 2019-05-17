@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -32,9 +33,21 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableGlobalMethodSecurity(securedEnabled=true,prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	@Autowired
+	private UserDetailsService userDetailsService;
+	
+	
+	@Autowired
+	protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication()
+		.withUser("user").password("user").roles("USER")
+		.and()
+		.withUser("user2").password(passwordEncoder().encode("user2Pass")).roles("USER").
+		and()
+		.withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
+	}
 
-	
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/resources/**", "/distribution/**",  "/StarAdmin/**", "/h2/**", "/admin").permitAll()
@@ -43,27 +56,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/entrar");
 		
 		http.csrf().disable();
+        http.headers().frameOptions().disable();
 	
 	}
 	
 	
-	/*@Autowired
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }*/
-	
-	@Autowired
-    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-          .withUser("user1").password(passwordEncoder().encode("user1")).roles("USER")
-          .and()
-          .withUser("user2").password(passwordEncoder().encode("user2Pass")).roles("USER")
-          .and()
-          .withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN");
-    }
-	
-
-		
+//	@Autowired
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//    }
+//		
 	
 	@Bean
     public PasswordEncoder passwordEncoder() {
