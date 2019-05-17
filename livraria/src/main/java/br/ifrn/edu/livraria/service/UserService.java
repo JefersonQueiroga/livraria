@@ -1,6 +1,7 @@
 package br.ifrn.edu.livraria.service;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.ifrn.edu.livraria.model.Role;
@@ -23,6 +25,10 @@ public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository repository;
+	
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -57,6 +63,12 @@ public class UserService implements UserDetailsService {
 	}
 	
 	public void salvar(User u) {
+		
+
+		//Condificando a senha
+		u.setPassword( passwordEncoder.encode(u.getPassword() ));
+		u.setDataCriacao(new Date());
+		u.setEnabled(true);
 		repository.save(u);
 	}
 

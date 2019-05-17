@@ -21,14 +21,14 @@
 				<tbody>
 					<tr th:each="usuario : ${usuarios}">
 						<td th:text="${usuario.id}"></td>
-						<td th:text="${usuario.nome}"></td>
-						<td th:text="${usuario.login}"></td>
+						<td th:text="${usuario.nomeCompleto}"></td>
+						<td th:text="${usuario.username}"></td>
 						<td>
 							<div class="btn-group pull-right">
 								<a class="btn btn-sm btn-primary"
-									th:href="@{/autor/edit/{id}(id=${autor.id})}">Editar</a> <a
+									th:href="@{/usuario/edit/{id}(id=${usuario.id})}">Editar</a> <a
 									class="delete btn btn-sm btn-danger"
-									th:href="@{/autor/delete/{id}(id=${autor.id})}">Excluir</a>
+									th:href="@{/usuario/delete/{id}(id=${usuario.id})}">Excluir</a>
 							</div>
 						</td>
 					</tr>

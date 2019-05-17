@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.ifrn.edu.livraria.model.Categoria;
 import br.ifrn.edu.livraria.model.User;
+import br.ifrn.edu.livraria.service.RoleService;
 import br.ifrn.edu.livraria.service.UserService;
 
 /**
@@ -27,11 +28,16 @@ public class UsuarioController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RoleService roleService;
 
 	@RequestMapping("/novo")
 	public ModelAndView add(User user) {
-		ModelAndView mv = new ModelAndView("user/form");
+		
+		ModelAndView mv = new ModelAndView("usuario/form");
 		mv.addObject("user", user);
+		mv.addObject("roles", roleService.buscarTodos());
 		return mv;
 	}
 

@@ -37,16 +37,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserDetailsService userDetailsService;
 	
 	
-	@Autowired
-	protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-		.withUser("user").password("user").roles("USER")
-		.and()
-		.withUser("user2").password(passwordEncoder().encode("user2Pass")).roles("USER").
-		and()
-		.withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
-	}
+	
+	 //Caso queira utilizar senha em memória descomentar esse método e comendar o método configure(AuthenticationManagerBuilder auth 
+	
+	/*
+	 * @Autowired protected void configure(final AuthenticationManagerBuilder auth)
+	 * throws Exception { auth.inMemoryAuthentication()
+	 * .withUser("user").password("user").roles("USER") .and()
+	 * .withUser("user2").password(passwordEncoder().encode("user2Pass")).roles(
+	 * "USER"). and()
+	 * .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN")
+	 * ; }
+	 */
 
+	
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -61,11 +65,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	
-//	@Autowired
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-//    }
-//		
+	
+	  @Autowired protected void configure(AuthenticationManagerBuilder auth) throws
+	  Exception {
+	  auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()
+	  ); }
+	 
 	
 	@Bean
     public PasswordEncoder passwordEncoder() {

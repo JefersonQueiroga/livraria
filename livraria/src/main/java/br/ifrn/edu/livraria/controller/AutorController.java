@@ -2,6 +2,7 @@ package br.ifrn.edu.livraria.controller;
 
 import java.util.Arrays;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,14 @@ public class AutorController {
 		return add(aut);
 	}
 	
-	@PreAuthorize("hasAuthority('ADM')")
+	
+	/**
+	 * metodo para deletar
+	 * Colocado a anotação ROLES_ALLOWED para deletar precisa do papel de administrador.
+	 * @param id
+	 * @return
+	 */
+	@RolesAllowed("ADMINISTRADOR")
 	@GetMapping("/delete/{id}")
 	private ModelAndView delete( @PathVariable("id") Long id) {
 		autorService.delete(id);

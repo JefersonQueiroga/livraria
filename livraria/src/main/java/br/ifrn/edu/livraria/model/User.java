@@ -47,8 +47,51 @@ public class User implements UserDetails {
 	@Column
 	@NotBlank(message="Nome completo é obrigatório")
 	private String nomeCompleto;
+
+
+	@CPF(message="CPF Inválido")
+	private String cpf;
+	
+	@NotNull
+	@NotEmpty(message = "Password não pode ser vazio.")
+	@Size(min = 6, message = "Password deve ser no mínimo 6 caracter.")
+	private String password;
+
+	@NotNull
+	@NotEmpty(message = "E-mail não pode ser vazio")
+	@Email(message = "E-mail inválido")
+	private String email;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCriacao;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataUpdate;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date ultimoAcesso;
+
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@ManyToMany
+	private Set<Role> role;
+	
 	
 
+	private boolean accountNonExpired;
+
+	private boolean accountNonLocked;
+
+	private boolean credentialsNonExpired;
+
+	private boolean enabled;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Set<GrantedAuthority> authorities = new HashSet<>();
+		authorities.addAll(getRole());
+		return authorities;
+	}
+	
 	public String getNomeCompleto() {
 		return nomeCompleto;
 	}
@@ -76,47 +119,7 @@ public class User implements UserDetails {
 	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
 		this.credentialsNonExpired = credentialsNonExpired;
 	}
-
-	@CPF(message="CPF Inválido")
-	private String cpf;
 	
-	@NotNull
-	@NotEmpty(message = "Password não pode ser vazio.")
-	@Size(min = 6, message = "Password deve ser no mínimo 6 caracter.")
-	private String password;
-
-	@NotNull
-	@NotEmpty(message = "E-mail não pode ser vazio")
-	@Email(message = "E-mail inválido")
-	private String email;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataCriacao;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dataUpdate;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date ultimoAcesso;
-
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@ManyToMany
-	private Set<Role> role;
-
-	private boolean accountNonExpired;
-
-	private boolean accountNonLocked;
-
-	private boolean credentialsNonExpired;
-
-	private boolean enabled;
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Set<GrantedAuthority> authorities = new HashSet<>();
-		authorities.addAll(getRole());
-		return authorities;
-	}
 
 	@Override
 	public String getPassword() {
