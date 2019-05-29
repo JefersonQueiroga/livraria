@@ -9,8 +9,10 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
@@ -26,18 +28,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
+@Table(name = "user")
 public class User implements UserDetails {
 
-	public User() {
-		this.dataCriacao = Calendar.getInstance().getTime();
-		this.enabled = true;
-		this.accountNonExpired = true;
-		this.accountNonLocked = true;
-		this.credentialsNonExpired = true;
-	}
+
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(unique = true)
@@ -81,6 +78,15 @@ public class User implements UserDetails {
 		authorities.addAll(getRole());
 		return authorities;
 	}
+
+	public User() {
+		this.dataCriacao = Calendar.getInstance().getTime();
+		this.enabled = true;
+		this.accountNonExpired = true;
+		this.accountNonLocked = true;
+		this.credentialsNonExpired = true;
+	}
+	
 
 	private boolean accountNonExpired;
 
