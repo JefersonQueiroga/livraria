@@ -75,7 +75,12 @@ public class User implements UserDetails {
 	@ManyToMany
 	private Set<Role> role;
 	
-	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Set<GrantedAuthority> authorities = new HashSet<>();
+		authorities.addAll(getRole());
+		return authorities;
+	}
 
 	private boolean accountNonExpired;
 
@@ -85,12 +90,7 @@ public class User implements UserDetails {
 
 	private boolean enabled;
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Set<GrantedAuthority> authorities = new HashSet<>();
-		authorities.addAll(getRole());
-		return authorities;
-	}
+	
 	
 	public String getNomeCompleto() {
 		return nomeCompleto;

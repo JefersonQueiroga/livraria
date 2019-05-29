@@ -55,10 +55,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/resources/**", "/distribution/**",  "/StarAdmin/**", "/h2/**", "/admin").permitAll()
-				.anyRequest().authenticated().and().formLogin().loginPage("/entrar").permitAll()
-				.successForwardUrl("/index").and().logout().permitAll()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/entrar");
 		
+		.anyRequest().authenticated().and().formLogin()
+		.loginPage("/entrar").permitAll()
+		
+		.successForwardUrl("/index").and().logout().permitAll()
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.logoutSuccessUrl("/entrar");
+		
+		//Retirar quando hospedar - para utilizar o H2 
 		http.csrf().disable();
         http.headers().frameOptions().disable();
 	

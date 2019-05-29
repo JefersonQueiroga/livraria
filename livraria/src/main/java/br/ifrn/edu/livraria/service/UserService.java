@@ -69,9 +69,15 @@ public class UserService implements UserDetailsService {
 		u.setPassword( passwordEncoder.encode(u.getPassword() ));
 		u.setDataCriacao(new Date());
 		u.setEnabled(true);
+		Role r = new Role(new Long(2));
+		u.getRole().add(r);
 		repository.save(u);
 	}
 
+	
+	
+	
+	
 	public Object findAll() {
 		return repository.findAll();
 	}

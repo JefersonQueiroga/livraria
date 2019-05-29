@@ -9,7 +9,15 @@ import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 public class Role implements GrantedAuthority{
-
+	
+	public Role() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Role(Long id) {
+		this.id=id;
+	}
+	
 	@Id
     @GeneratedValue
     private Long id;
