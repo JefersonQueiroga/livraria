@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html 
+xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layout}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+<head>
+<title>Spring-Boot Básico</title>
+<meta charset="UTF-8" />
+</head>
+<body>
+
+		<div class="content-wrapper" layout:fragment="corpo">
+			<form class="container was-validated" method="post" th:object="${autor}"
+				th:action="@{/autor/save}">
+
+				<!--Input responsável em guardar o id-->
+				<input id="id" name="id" type="hidden" th:field="*{id}"	th:value="*{id}"/>
+
+				<!-- div reponsável em mostrar os erros -->
+				<div class="form-group row">
+					<div class="alert alert-danger alert-dismissible fade show"
+						role="alert" th:if="${#fields.hasAnyErrors()}">
+
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+
+						<div th:each="detailedError : ${#fields.detailedErrors()}">
+							<strong th:text="${detailedError.message}"> </strong>
+						</div>
+					</div>
+				</div>
+				<!-- Começo do input -->
+				<div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error" >
+					<label for="usr">Name:</label> <input type="text"
+						th:field="*{nome}" class="form-control" id="usr">
+				</div>
+				
+				<div class="form-group is-invalid">
+					<label for="cpf">CPF:</label> <input type="text"
+						th:field="*{cpf}" class="form-control" id="cpf">
+				</div>
+				
+				<div class="form-group">
+					<label for="email">E-mail:</label> <input type="text"
+						th:field="*{email}" class="form-control" id="email">
+				</div>
+				
+				<div class="form-group" th:classappend="${#fields.hasErrors('telefone')} ? has-error">
+					<label for="telefone">Telefone:</label> 
+					<input type="text"	th:field="*{telefone}" class="form-control tipoTelefone" id="telefone" onkeypress="$(this).mask('(00) 0000-00009')" >
+				</div>
+				
+				<div class="form-group">
+					<label for="data">Data de Nascimento:</label> <input type="date" 
+						th:field="*{dataNascimento}" class="form-control" id="data">
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Autor:</label>
+					<div class="col-sm-4">
+						<label th:each="sexo : ${sexos}" class="radio-inline">
+							<input type="radio" th:value="${sexo}" th:field="*{sexo}"/>
+							<span th:text="${sexo.descricao}"></span>
+							
+						</label>
+					</div>
+				</div>
+
+				
+				<button type="submit" class="btn btn-primary">Cadastrar</button>
+
+			</form>
+			<script type="text/javascript"  th:src="@{/js/mascaras.js}"></script>  
+		</div>
+	
+	
+</body>
+
+	
+</html>
