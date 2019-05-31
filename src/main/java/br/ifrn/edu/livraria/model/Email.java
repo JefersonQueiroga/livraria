@@ -1,0 +1,67 @@
+package br.ifrn.edu.livraria.model;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Email {
+	private String from;
+    private String to;
+    private String subject;
+    private String content;
+    private Map<String,Object> map;
+    
+    public Email() {
+		// TODO Auto-generated constructor stub
+	}
+    
+    public Email(String from, String to, String subject, String content) {
+        this.from = from;
+        this.to = to;
+        this.subject = subject;
+        this.content = content;
+        map = new HashMap<>();
+    }
+
+	public Map<String, Object> getMap() {
+		return map;
+	}
+
+	public void setMap(Map<String, Object> map) {
+		this.map = map;
+	}
+
+	public String getFrom() {
+		return from;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
+	}
+
+	public String getTo() {
+		return to;
+	}
+
+	public void setTo(String to) {
+		this.to = to;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+    
+    
+
+}

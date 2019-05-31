@@ -40,17 +40,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	 //Caso queira utilizar senha em memória descomentar esse método e comendar o método configure(AuthenticationManagerBuilder auth 
 	
-	/*
-	 * @Autowired protected void configure(final AuthenticationManagerBuilder auth)
-	 * throws Exception { auth.inMemoryAuthentication()
-	 * .withUser("user").password("user").roles("USER") .and()
-	 * .withUser("user2").password(passwordEncoder().encode("user2Pass")).roles(
-	 * "USER"). and()
-	 * .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN")
-	 * ; }
-	 */
-
 	
+//	 @Autowired 
+//	 protected void configure(final AuthenticationManagerBuilder auth)
+//	  throws Exception { auth.inMemoryAuthentication()
+//	  .withUser("user").password("user").roles("USER") .and()
+//	  .withUser("user2").password(passwordEncoder().encode("user2Pass")).roles(
+//	  "USER"). and()
+//	  .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN")
+//	  ; }
+//	 
+
+
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

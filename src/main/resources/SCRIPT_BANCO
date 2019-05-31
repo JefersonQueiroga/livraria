@@ -1,2 +1,7 @@
 INSERT INTO ROLE (ID,NOME) VALUES (1,'ADMINISTRADOR');
 INSERT INTO ROLE (ID,NOME) VALUES (2,'CLIENTE');
+
+
+INSERT INTO public.usuario(
+	id, account_non_expired, account_non_locked, cpf, credentials_non_expired, data_criacao, data_update, email, enabled, nome_completo, password, ultimo_acesso, username)
+	VALUES (1, true,true , '05098819474', 'false', '2019-05-11', null, 'jefersonqueiroga@gmail.com',true, 'Jeferson QUeiroga', '$2a$10$v5BWZE8ZcL6nYDIHKa0/mu69OqIn8qOTEY4Dz4IelNJ2RumM5SOUK', null , 'jefersonqueiroga');
