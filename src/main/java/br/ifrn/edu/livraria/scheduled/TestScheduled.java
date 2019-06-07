@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import br.ifrn.edu.livraria.model.Email;
 import br.ifrn.edu.livraria.service.EmailService;
+import freemarker.template.TemplateException;
 
 @Component
 public class TestScheduled {
@@ -42,7 +43,12 @@ public class TestScheduled {
         model.put("signature", "https://suap.ifrn.edu.br");
         mail.setMap(model);
 
-        emailService.sendSimpleMessage(mail);
+        try {
+			emailService.sendSimpleMessage(mail,model);
+		} catch (TemplateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

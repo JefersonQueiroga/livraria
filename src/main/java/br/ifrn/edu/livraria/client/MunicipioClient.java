@@ -4,14 +4,12 @@ package br.ifrn.edu.livraria.client;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import br.ifrn.edu.livraria.controller.MunicipioController;
 import br.ifrn.edu.livraria.dto.Municipio;
 import br.ifrn.edu.livraria.dto.Regiao;
 
@@ -26,8 +24,6 @@ public class MunicipioClient {
 	    List<Object>searchList= Arrays.asList(forNow);
 		System.out.println(searchList.size());
 	}*/
-	
-
 	
 	public List<Regiao> buscarRegioes() {
 		RestTemplate restTemplate = new RestTemplate();
